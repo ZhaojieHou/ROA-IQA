@@ -1,0 +1,7 @@
+
+{
+  "model": "YOTO-NR",
+  "source_dataset": "KonIQ-10k",
+  "native_budget": 20,
+  "B_fixed": 7
+}
