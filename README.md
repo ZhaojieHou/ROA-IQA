@@ -12,19 +12,18 @@ Use Python 3.11 and a CUDA-capable NVIDIA GPU. The reference predictions were ge
 python -m pip install -r requirements-inference.txt
 ```
 
-Download the S01 checkpoint from this repository's **Releases** page after the release is published, then save it as `checkpoints/S01.pt`.
-
-```bash
-python scripts/verify_assets.py checkpoints/S01.pt
-```
+Download `YOTO_NR_KONIQ_S01_SELF_TRAINED.pt` from the [Releases page](https://github.com/ZhaojieHou/ROA-IQA/releases) after publication, then save it as `checkpoints/S01.pt`. The model is a separate Release attachment, not a Git file.
 
 The model loader also requires the original [YOTO source](https://github.com/BarCodeReader/YOTO) and the [official Swin-T 22k initializer](https://github.com/SwinTransformer/storage/releases/tag/v1.0.8). Obtain these files from their original sources and prepare the local assets:
 
 ```bash
+git clone https://github.com/BarCodeReader/YOTO.git downloads/YOTO
+git -C downloads/YOTO checkout e9970581494cc426b99c6cf193127172c045ac1c
+curl -L --fail https://github.com/SwinTransformer/storage/releases/download/v1.0.8/swin_tiny_patch4_window7_224_22k.pth -o downloads/swin_tiny_patch4_window7_224_22k.pth
 python scripts/prepare_yoto_assets.py --source-dir downloads/YOTO --swin downloads/swin_tiny_patch4_window7_224_22k.pth --asset-root assets
 ```
 
-The repository does not redistribute the original YOTO source files.
+The repository does not redistribute the original YOTO source files. On Windows PowerShell, use `curl.exe` for the download command. The preparation script creates `assets/source/YOTO_official_snapshot/` and `assets/models/pretrained/`; keep the supplied vendored `timm` inside the YOTO source. Do not install the original training requirements. The loader retains tensor-shape checks and strict checkpoint loading.
 
 ## 2. Run and verify the inference example
 

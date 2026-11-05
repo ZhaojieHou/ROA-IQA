@@ -5,3 +5,9 @@ __pycache__/
 *.pth
 *.pt
 replay_result.json
+
+assets/
+downloads/
+checkpoints/
+result.json
+demo_result.json
